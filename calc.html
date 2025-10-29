@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .main{
+        width: 15%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin:auto;
+       
+        border: 1px solid black;
+        border-radius: 5%;
+        padding-bottom: 1%;
+        background-color: #e0e9f1;
+    }
+    button{
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+    }
+    button:hover{
+        filter: brightness(85%);
+    }
+
+    .num{
+        background-color: #4f617f;
+        
+    }
+    .op{
+        background-color: #af6b7f;
+    }
+    .c{
+        background-color: #bf6734;
+    }
+    #res{
+        width: 91%;
+        height: 30px;
+        padding: 10px;
+        background-color: #afb4bd;
+        font-size: 1.5em;
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <div class="main">
+        
+        <div class="calculator">
+            <div>
+            <p id="res"></p>
+        </div>
+            <div class="buttons">
+                <table>
+                    <tr>
+                        <td><button class="num" onclick="num('1')">1</button></td>
+                        <td><button class="num" onclick="num('2')">2</button></td>
+                        <td><button class="num" onclick="num('3')">3</button></td>
+                        <td><button class="op" onclick="op('*')">*</button></td>
+                        <td><button class="c" onclick="clearDisplay()">C</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="num" onclick="num('4')">4</button></td>
+                        <td><button class="num" onclick="num('5')">5</button></td>
+                        <td><button class="num" onclick="num('6')">6</button></td>
+                        <td><button class="op" onclick="op('/')">/</button></td>
+                    </tr>
+                     <tr>
+                        <td><button class="num" onclick="num('7')">7</button></td>
+                        <td><button class="num" onclick="num('8')">8</button></td>
+                        <td><button class="num" onclick="num('9')">9</button></td>
+                        
+                        <td><button class="op" onclick="op('-')">-</button></td>
+                    </tr>
+                     <tr>
+                        
+                        <td><button class="num" onclick="num('.')">.</button></td>
+                        <td><button class="num" onclick="num('0')">0</button></td>
+                        <td><button class="op" onclick="op('+')">+</button></td>
+                        <td><button class="op" onclick="calc()">=</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+
+        
+        let input1="";
+        let input2="";
+        let op_input="";
+      
+        function num(number){
+            if(op_input===""){
+                input1+=number
+
+            }else{
+                input2+=number
+            }
+            document.getElementById("res").innerHTML = `${input1} ${op_input} ${input2}`;
+        }
+        function op(operator){
+            if(input1==="")return;
+            if(input2!==""){
+                calc(operator);
+            }
+            op_input=operator;
+            document.getElementById("res").innerHTML = `${input1} ${op_input}`;
+            
+        }
+       
+        function calc(){
+            if(input2==="" || input1===""){
+                return;
+            }
+            let res=0;
+            let num1=parseFloat(input1);
+            let num2=parseFloat(input2);
+                if(op_input==='*'){
+                    res=num1*num2;
+                }else if(op_input==='/'){
+                    res=num1/num2
+                }
+                else if(op_input==='-'){
+                    res=num1-num2
+                }
+                else if(op_input==='+'){
+                   res=num1+num2
+                }
+               input1=res.toString();
+               document.getElementById("res").innerHTML = `${res}`;
+               input2="";
+               op_input="";
+           
+        }
+        function clearDisplay(){
+            input1="";
+            input2="";
+            op_input="";
+
+            document.getElementById("res").innerHTML = '';
+        }
+       
+     
+</script>
+</body>
+</html>
